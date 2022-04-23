@@ -1,0 +1,41 @@
+@font-face {
+    font-family: "NBG";
+    src: url("./fonts/NanumBarunGothic.ttf");
+}
+body {
+    margin: 0;
+}
+#top {
+    font-family: "NBG";
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: auto;
+    height: 75px;
+    background: #202020;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+#title {
+    color: #ffffff;
+    font-size: 30px;
+    margin: auto 0;
+    height: auto;
+}
+asm-mark {
+    margin-right: 25px;
+    width: 20px;
+    height: 20px;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+}
+    .off {
+        background: #ff0000;
+    }
+    .on {
+        background: #00ff00;
+    }
+    .error {
+        background: #ffff00;
+    }

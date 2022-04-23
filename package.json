@@ -1,17 +1,23 @@
 {
+  "dependencies": {
+    "electron": "^18.1.0"
+  },
+  "scripts": {
+    "start": "electron ."
+  },
   "name": "anil",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "main": "main.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/museekee/Anil.git"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "express": "^4.17.3"
+  "bugs": {
+    "url": "https://github.com/museekee/Anil/issues"
   },
-  "devDependencies": {
-    "nodemon": "^2.0.15"
-  }
+  "homepage": "https://github.com/museekee/Anil#readme",
+  "description": ""
 }
