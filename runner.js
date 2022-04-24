@@ -1,40 +1,60 @@
-const Spawn = require("child_process").spawn;
-const { ipcRenderer } = require("electron");
-
-class ChildProcess{
-    constructor(...argv) {
-        this.process = Spawn("node", argv);
-        this.process.on('close', code => {
-			let msg;
-
-			this.process.removeAllListeners();
-			// JLog.error(msg = `CLOSED WITH CODE ${code}`);
-			this.process = null;
-            ipcRenderer.send('server-status', getServerStatus());
-		});
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
     }
-    kill(sig){
-		if(this.process) this.process.kill(sig || 'SIGINT');
-	}
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getServerStatus = exports.stopServer = exports.startServer = void 0;
+const child = __importStar(require("child_process"));
+class ChildProcess {
+    constructor() {
+        this.process = child.exec(`node ${__dirname}\\Web\\app.js`);
+        console.log(`node ${__dirname}/Web/app.js`);
+        this.process.on('close', () => {
+            this.process.removeAllListeners();
+            this.process = null;
+        });
+    }
+    kill() {
+        if (this.process)
+            this.process.kill('SIGINT');
+    }
 }
-
 let webServer;
-function startServer(){
-	stopServer();
-	webServer = new ChildProcess(`${__dirname}/Web/app.js`, 1);
-    console.log(getServerStatus());
-    ipcRenderer.send('server-status', getServerStatus());
+function startServer() {
+    stopServer();
+    webServer = new ChildProcess();
 }
-function stopServer(){
-    if (webServer) webServer.kill();
+exports.startServer = startServer;
+function stopServer() {
+    if (webServer)
+        webServer.kill();
 }
-function getServerStatus(){
-	if(!webServer) return 0;
-	if(webServer.process) return 2;
-	return 1;
+exports.stopServer = stopServer;
+function getServerStatus() {
+    if (!webServer)
+        return 0;
+    if (webServer.process)
+        return 2;
+    return 1;
 }
-
-module.exports = {
-    startServer,
-    stopServer
-}
+exports.getServerStatus = getServerStatus;

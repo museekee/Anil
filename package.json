@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "color": "^4.2.3",
     "electron": "^18.1.0"
   },
   "scripts": {
@@ -8,7 +9,6 @@
   "name": "anil",
   "version": "1.0.0",
   "main": "main.js",
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/museekee/Anil.git"
